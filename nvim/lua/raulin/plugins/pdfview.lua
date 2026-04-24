@@ -1,0 +1,31 @@
+return {
+    -- "basola21/PDFview",
+    -- lazy = false,
+    -- dependencies = { "nvim-telescope/telescope.nvim" },
+    -- vim.keymap.set("n", "<leader>fp", function()
+    --     local builtin = require("telescope.builtin")
+    --     local actions = require("telescope.actions")
+    --     local action_state = require("telescope.actions.state")
+    --
+    --     builtin.find_files({
+    --         prompt_title = "Find PDFs",
+    --         find_command = { "find", ".", "-type", "f", "-name", "*.pdf" }, -- Only show PDFs
+    --         attach_mappings = function(prompt_bufnr, map)
+    --             actions.select_default:replace(function()
+    --                 actions.close(prompt_bufnr)
+    --                 local selection = action_state.get_selected_entry()
+    --                 require("pdfview").open(selection.path or selection[1])
+    --             end)
+    --             return true
+    --         end,
+    --     })
+    -- end, { desc = "Find and open PDF" }),
+    --
+    -- vim.api.nvim_create_autocmd("BufReadPost", {
+    --     pattern = "*.pdf",
+    --     callback = function()
+    --         local file_path = vim.api.nvim_buf_get_name(0)
+    --         require("pdfview").open(file_path)
+    --     end,
+    -- }),
+}

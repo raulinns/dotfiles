@@ -1,0 +1,100 @@
+-- -- File: ~/.config/nvim/snippets/markdown.lua
+--
+-- -- Impor fungsi-fungsi yang dibutuhkan dari luasnip
+-- local ls = require("luasnip")
+-- local s = ls.snippet
+-- local t = ls.text_node
+-- local i = ls.insert_node
+-- local f = ls.function_node
+--
+-- -- ===================================================================
+-- -- Fungsi untuk mendeteksi apakah kursor berada di dalam mode matematika
+-- -- ===================================================================
+-- local function in_mathzone()
+--     -- Gunakan Treesitter untuk deteksi yang lebih akurat jika tersedia
+--     if vim.treesitter.get_parser() then
+--         local node = vim.treesitter.get_node({ bufnr = 0, lang = "markdown" })
+--         if node then
+--             -- Cek apakah node saat ini atau parent-nya adalah math
+--             while node do
+--                 local n_type = vim.treesitter.get_node_type(node)
+--                 if n_type == "inline_math" or n_type == "display_math" then
+--                     return true
+--                 end
+--                 node = node:parent()
+--             end
+--         end
+--     end
+--     -- Fallback sederhana jika Treesitter tidak aktif: cek jumlah '$'
+--     local line_to_cursor = vim.api.nvim_buf_get_lines(0, vim.fn.line('.') - 1, vim.fn.line('.'), true)[1]:sub(1,
+--         vim.fn.col('.') - 1)
+--     local dollar_count = 0
+--     for _ in line_to_cursor:gmatch("%$") do dollar_count = dollar_count + 1 end
+--     return dollar_count % 2 ~= 0
+-- end
+--
+-- -- ===================================================================
+-- -- Kumpulan snippet Anda, SEMUANYA DENGAN KONDISI "in_mathzone"
+-- -- ===================================================================
+-- return {
+--     s({ trig = "mk", cond = in_mathzone }, { t("$"), i(1), t("$") }),
+--     s({ trig = "dm", cond = in_mathzone }, { t({ "$$", "" }), i(1), t({ "", "$$" }) }),
+--     s({ trig = "beg", cond = in_mathzone },
+--         { t({ "\\begin{", "" }), i(1), t({ "", "}", "" }), i(2), t({ "", "\\end{", "" }), f(
+--         function(_, snip) return snip.captures[1] end, { 1 }), t({ "", "}" }) }),
+--     s({ trig = "@a", cond = in_mathzone }, { t("\\alpha") }),
+--     s({ trig = "@b", cond = in_mathzone }, { t("\\beta") }),
+--     s({ trig = "@g", cond = in_mathzone }, { t("\\gamma") }),
+--     s({ trig = "@G", cond = in_mathzone }, { t("\\Gamma") }),
+--     s({ trig = "@d", cond = in_mathzone }, { t("\\delta") }),
+--     s({ trig = "@D", cond = in_mathzone }, { t("\\Delta") }),
+--     s({ trig = "@e", cond = in_mathzone }, { t("\\epsilon") }),
+--     s({ trig = ":e", cond = in_mathzone }, { t("\\varepsilon") }),
+--     s({ trig = "@z", cond = in_mathzone }, { t("\\zeta") }),
+--     s({ trig = "@t", cond = in_mathzone }, { t("\\theta") }),
+--     s({ trig = "@T", cond = in_mathzone }, { t("\\Theta") }),
+--     s({ trig = ":t", cond = in_mathzone }, { t("\\vartheta") }),
+--     s({ trig = "@i", cond = in_mathzone }, { t("\\iota") }),
+--     s({ trig = "@k", cond = in_mathzone }, { t("\\kappa") }),
+--     s({ trig = "@l", cond = in_mathzone }, { t("\\lambda") }),
+--     s({ trig = "@L", cond = in_mathzone }, { t("\\Lambda") }),
+--     s({ trig = "@s", cond = in_mathzone }, { t("\\sigma") }),
+--     s({ trig = "@S", cond = in_mathzone }, { t("\\Sigma") }),
+--     s({ trig = "@u", cond = in_mathzone }, { t("\\upsilon") }),
+--     s({ trig = "@U", cond = in_mathzone }, { t("\\Upsilon") }),
+--     s({ trig = "@o", cond = in_mathzone }, { t("\\omega") }),
+--     s({ trig = "@O", cond = in_mathzone }, { t("\\Omega") }),
+--     s({ trig = "ome", cond = in_mathzone }, { t("\\omega") }),
+--     s({ trig = "Ome", cond = in_mathzone }, { t("\\Omega") }),
+--     s({ trig = "text", cond = in_mathzone }, { t("\\text{"), i(1), t("}") }),
+--     s({ trig = "\"", cond = in_mathzone }, { t("\\text{"), i(1), t("}") }),
+--     s({ trig = "sr", cond = in_mathzone }, { t("^{2}") }),
+--     s({ trig = "cb", cond = in_mathzone }, { t("^{3}") }),
+--     s({ trig = "rd", cond = in_mathzone }, { t("^{"), i(1), t("}") }),
+--     s({ trig = "sts", cond = in_mathzone }, { t("_\\text{"), i(1), t("}") }),
+--     s({ trig = "sq", cond = in_mathzone }, { t("\\sqrt{"), i(1), t("}") }),
+--     s({ trig = "ee", cond = in_mathzone }, { t("e^{"), i(1), t("}") }),
+--     s({ trig = "invs", cond = in_mathzone }, { t("^{-1}") }),
+--     s({ trig = "conj", cond = in_mathzone }, { t("^{*}") }),
+--     s({ trig = "Re", cond = in_mathzone }, { t("\\mathrm{Re}") }),
+--     s({ trig = "Im", cond = in_mathzone }, { t("\\mathrm{Im}") }),
+--     s({ trig = "bf", cond = in_mathzone }, { t("\\mathbf{"), i(1), t("}") }),
+--     s({ trig = "rm", cond = in_mathzone }, { t("\\mathrm{"), i(1), t("}") }),
+--     s({ trig = "trace", cond = in_mathzone }, { t("\\mathrm{Tr}") }),
+--     s({ trig = "hat", cond = in_mathzone }, { t("\\hat{"), i(1), t("}") }),
+--     s({ trig = "bar", cond = in_mathzone }, { t("\\bar{"), i(1), t("}") }),
+--     s({ trig = "cdot", cond = in_mathzone }, { t("\\cdot") }),
+--     s({ trig = "tilde", cond = in_mathzone }, { t("\\tilde{"), i(1), t("}") }),
+--     s({ trig = "und", cond = in_mathzone }, { t("\\underline{"), i(1), t("}") }),
+--     s({ trig = "vec", cond = in_mathzone }, { t("\\vec{"), i(1), t("}") }),
+--     s({ trig = "xnn", cond = in_mathzone }, { t("x_{n}") }),
+--     s({ trig = "\\xii", priority = 1001, cond = in_mathzone }, { t("x_{i}") }),
+--     s({ trig = "xjj", cond = in_mathzone }, { t("x_{j}") }),
+--     s({ trig = "xp1", cond = in_mathzone }, { t("x_{n+1}") }),
+--     s({ trig = "ynn", cond = in_mathzone }, { t("y_{n}") }),
+--     s({ trig = "yii", cond = in_mathzone }, { t("y_{i}") }),
+--     s({ trig = "yjj", cond = in_mathzone }, { t("y_{j}") }),
+--     s({ trig = "ooo", cond = in_mathzone }, { t("\\infty") }),
+--     s({ trig = "sum", cond = in_mathzone }, { t("\\sum") }),
+--     s({ trig = "prod", cond = in_mathzone }, { t("\\prod") }),
+-- }
