@@ -63,4 +63,4 @@ vim.keymap.set("n", "<leader>e", ":Neotree float toggle<CR>", { desc = "Toggle N
 vim.keymap.set("n", "<C-b>", "<Cmd>Neotree focus<CR>", { desc = "Focus Neo-tree" })
 
 -- Simple keymap to open Navbuddy (e.g., using <leader>n)
-vim.keymap.set("n", "<leader>n", ":Navbuddy<cr>", { desc = "Toggle Navbuddy" })
+vim.keymap.set("n", "<C-p>", ":Navbuddy<cr>", { desc = "Toggle Navbuddy" })

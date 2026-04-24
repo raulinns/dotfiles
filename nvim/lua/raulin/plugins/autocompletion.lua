@@ -60,7 +60,7 @@ return {
                 -- Konfigurasi key mapping (sesuai niat 'super-tab' Anda)
                 mapping = {
                     -- Terima saran dengan Enter
-                    ["<S-Tab>"] = cmp.mapping.confirm({ select = true }),
+                    ["<Tab>"] = cmp.mapping.confirm({ select = true }),
 
                     -- Tolak saran dengan Ctrl + e
                     ["<C-e>"] = cmp.mapping.abort(),
