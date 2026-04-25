@@ -38,7 +38,7 @@ return {
                     },
                 },
                 clangd = {},
-                tsserver = {},
+                ts_ls = {},
                 cssls = {},
                 html = {},
                 jsonls = {},
